@@ -4,116 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>app_sudo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            padding: 0;
             background-color: #f4f4f9;
             color: #333;
             font-family: Arial, sans-serif;
-            margin: 0;
+        }
+        .text-center button {
+            width: 40%;
+            margin: 10px;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            padding: 10px;
+        }
+        .col-md-4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .col-md-4 button {
+            width: 40%;
+            margin: 10px;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            padding: 10px;
         }
         .cabecalho {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
-        }
-        .btn {
-            display: inline-block;
-            font-weight: 400;
-            color: #212529;
-            text-align: center;
-            vertical-align: middle;
-            user-select: none;
-            background-color: transparent;
-            border: 1px solid transparent;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 0.25rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-        .btn-primary {
-            color: #fff;
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            color: #fff;
-            background-color: #0056b3;
-            border-color: #004085;
-        }
-        .btn-secondary {
-            color: #fff;
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            color: #fff;
-            background-color: #565e64;
-            border-color: #4e555b;
-        }
-        .btn-warning {
-            color: #212529;
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
-        .btn-warning:hover {
-            color: #212529;
-            background-color: #e0a800;
-            border-color: #d39e00;
-        }
-        .btn-danger {
-            color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-        .btn-danger:hover {
-            color: #fff;
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-        .btn-success {
-            color: #fff;
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-        .btn-success:hover {
-            color: #fff;
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
-        .btn-info {
-            color: #fff;
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-        }
-        .btn-info:hover {
-            color: #fff;
-            background-color: #138496;
-            border-color: #117a8b;
-        }
-        .container {
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        .mt-4 {
-            margin-top: 1.5rem;
-        }
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
-        }
-        .col-md-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
-        .text-center {
-            text-align: center;
         }
         .bloco-anotacao {
             margin-top: 10px;
@@ -125,384 +45,106 @@
             background-color: #ffffff;
             color: #333;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 1.25rem;
+            line-height: 1.5;
         }
-        button img {
-            height: 80px;
-            width: 97px;
+        .bloco-anotacao:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
         }
-        .icones-precisao div,
-        .icones-chamar div {
-            text-align: center;
-        }
-        .user-message { color: blue; }
-        .ai-message { color: green; }
-        .loader span { animation: blink 1.4s linear infinite; }
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        .btn-custom {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            padding: 10px;
         }
         footer {
             display: flex;
             justify-content: space-between;
+        }
+        @media (max-width: 768px) {
+            .cabecalho, .btn-custom, .bloco-anotacao {
+                width: 100%;
+            }
+            .btn-custom {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <header class="cabecalho">
         <a href="https://translate.google.com.br/?sl=auto&tl=pt&op=translate">
-            <button class="btn btn-primary">Google Tradutor</button>
+            <button class="btn btn-primary btn-custom">Google Tradutor</button>
         </a>
     </header>
     <main class="container">
+        <div class="text-center">
+            <button class="btn btn-warning mb-2 btn-custom" onclick="copiarTexto()">Copiar texto</button>
+            <button class="btn btn-danger mb-2 btn-custom" onclick="limparTexto()">Limpar texto</button>
+        </div>
         <div class="row">
-            <div class="col-md-6 icones-precisao">
-                <h4 class="text-center">Preciso de</h4>
-                <div class="row">
-                    <div class="text-center">
-                        <button class="btn btn-secondary" onclick="falarClasse(this)">
-                            <img src="img/dor.png" alt="">
-                        </button>
-                        <p>Dor</p>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-secondary" onclick="falarClasse(this)">
-                            <img src="img/fome.png" alt="">
-                        </button>
-                        <p>Fome</p>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-secondary" onclick="falarClasse(this)">
-                            <img src="img/sede.jpg" alt="">
-                        </button>
-                        <p>Sede</p>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-secondary" onclick="falarClasse(this)">
-                            <img src="img/dormir.jfif" alt="">
-                        </button>
-                        <p>Quero Dormir</p>
-                    </div>
+            <div class="col-md-8">
+                <div class="bloco-anotacao" contenteditable="true" id="blocoAnotacao">
+                    Clique aqui e comece a digitar...
                 </div>
             </div>
-            <div class="col-md-6 cones-chamar">
-                <h4 class="text-center">Chamar</h4>
-                <div class="row">
-                    <div class="text-center">
-                        <button class="btn btn-secondary" onclick="falarClasse(this)">
-                            <img src="img/brincar.jfif" alt="">
-                        </button>
-                        <p>Brincar</p>
-                    </div>
-                    <!DOCTYPE html>
-                    <html lang="pt-br">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>app_sudo</title>
-                        <!-- Adicionando Bootstrap -->
-                        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-                        <style>
-                            body {
-                                padding: 0;
-                                background-color: #f4f4f9;
-                                color: #333;
-                                font-family: Arial, sans-serif;
-                                margin: 0;
-                            }
-                            .cabecalho {
-                                display: flex;
-                                justify-content: center;
-                                margin-bottom: 20px;
-                            }
-                            .bloco-anotacao {
-                                margin-top: 10px;
-                                border: 1px solid #ddd;
-                                padding: 10px;
-                                min-height: 200px;
-                                margin-bottom: 20px;
-                                border-radius: 9px;
-                                background-color: #ffffff;
-                                color: #333;
-                                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                            }
-                            button img {
-                                height: 80px;
-                                width: 97px;
-                            }
-                            .icones-precisao div,
-                            .icones-chamar div {
-                                text-align: center;
-                            }
-                            .user-message { color: blue; }
-                            .ai-message { color: green; }
-                            .loader span { animation: blink 1.4s linear infinite; }
-                            @keyframes blink {
-                                0% { opacity: 0; }
-                                50% { opacity: 1; }
-                                100% { opacity: 0; }
-                            }
-                            footer {
-                                display: flex;
-                                justify-content: space-between;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <header class="cabecalho">
-                            <a href="https://translate.google.com.br/?sl=auto&tl=pt&op=translate">
-                                <button class="btn btn-primary">Google Tradutor</button>
-                            </a>
-                        </header>
-                        <main class="container">
-                            <div class="row">
-                                <div class="col-md-6 icones-precisao">
-                                    <h4 class="text-center">Preciso de</h4>
-                                    <div class="row">
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/dor.png" alt="">
-                                            </button>
-                                            <p>Dor</p>
-                                        </div>
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/fome.png" alt="">
-                                            </button>
-                                            <p>Fome</p>
-                                        </div>
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/sede.jpg" alt="">
-                                            </button>
-                                            <p>Sede</p>
-                                        </div>
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/dormir.jfif" alt="">
-                                            </button>
-                                            <p>Quero Dormir</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 icones-chamar">
-                                    <h4 class="text-center">Chamar</h4>
-                                    <div class="row">
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/brincar.jfif" alt="">
-                                            </button>
-                                            <p>Brincar</p>
-                                        </div>
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/banheiro.jfif" alt="">
-                                            </button>
-                                            <p>Banheiro</p>
-                                        </div>
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/assistir.jfif" alt="">
-                                            </button>
-                                            <p>Assistir</p>
-                                        </div>
-                                        <div class="text-center col-6 col-md-3">
-                                            <button class="btn btn-secondary" onclick="falarClasse(this)">
-                                                <img src="img/carinho.jfif" alt="">
-                                            </button>
-                                            <p>Carinho</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button class="btn btn-warning mb-2" onclick="copiarTexto()">Copiar texto</button>
-                                <button class="btn btn-danger mb-2" onclick="limparTexto()">Limpar texto</button>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="width:40%; display: flex; flex-direction: column;">
-                                    <button class="btn btn-success" onclick="falarTexto()">Falar</button>
-                                    <button class="btn btn-info" onclick="escutarAutoFalante()">Escutar</button>
-                                </div>
-                                <div class="bloco-anotacao" contenteditable="true" id="blocoAnotacao">
-                                    Clique aqui e comece a digitar...
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button class="btn btn-info mt-4" id="start-btn">Falar</button>
-                            </div>
-                            <div id="chat-container"></div>
-                        </main>
-                        <script>
-                            // Função para normalizar o texto removendo acentos e caracteres especiais
-                            function normalizeText(text) {
-                                return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-                            }
-                    
-                            // Função para calcular a distância de Levenshtein entre duas strings
-                               // Função para calcular a similaridade de strings usando a distância de Levenshtein
-                        function calculateSimilarity(str1, str2) {
-                            str1 = normalizeText(str1);
-                            str2 = normalizeText(str2);
-                            const maxLen = Math.max(str1.length, str2.length);
-                            return maxLen === 0 ? 1.0 : 1.0 - (levenshteinDistance(str1, str2) / maxLen);
-                        }
-                    
-                        let awaitingUserResponse = false;
-                        let currentQuestion = '';
-                        let contextHistory = [];
-                    
-                        // Carregar respostas salvas do localStorage
-                        let savedResponses = JSON.parse(localStorage.getItem('savedResponses')) || {};
-                    
-                        const startBtn = document.getElementById('start-btn');
-                        const chatContainer = document.getElementById('chat-container');
-                    
-                        startBtn.addEventListener('click', () => {
-                            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-                            recognition.lang = 'pt-BR';
-                            recognition.start();
-                    
-                            recognition.onresult = async (event) => {
-                                const userInput = event.results[0][0].transcript;
-                                processInput(userInput);
-                            };
-                    
-                            recognition.onerror = (event) => {
-                                displayMessage('Erro no reconhecimento de fala: ' + event.error, 'ai');
-                            };
-                        });
-                    
-                        async function processInput(userInput) {
-                            displayMessage(userInput, 'user');
-                            contextHistory.push(userInput);
-                            showLoading();
-                    
-                            setTimeout(async () => {
-                                if (awaitingUserResponse) {
-                                    saveNewResponse(currentQuestion, userInput);
-                                    awaitingUserResponse = false;
-                                    currentQuestion = '';
-                                    hideLoading();
-                                    displayMessage('Obrigado! Sua resposta foi salva.', 'ai');
-                                    return;
-                                }
-                    
-                                if (userInput.toLowerCase().startsWith('pesquise sobre')) {
-                                    await searchAndDisplayResults(userInput.substring(14).trim());
-                                    hideLoading();
-                                    return;
-                                }
-                    
-                                const normalizedInput = normalizeText(userInput);
-                                if (savedResponses[normalizedInput]) {
-                                    hideLoading();
-                                    displayMessage(savedResponses[normalizedInput], 'ai');
-                                    return;
-                                }
-                    
-                                const predefinedResponses = await fetch('respostas.json')
-                                    .then(response => response.json())
-                                    .catch(error => {
-                                        hideLoading();
-                                        displayMessage(`Erro ao carregar respostas prontas: ${error.message}`, 'ai');
-                                        return {};
-                                    });
-                    
-                                let bestMatch = '';
-                                let highestSimilarity = 0;
-                    
-                                for (const [question, answer] of Object.entries(predefinedResponses)) {
-                                    const similarity = calculateSimilarity(userInput, question);
-                                    if (similarity > highestSimilarity) {
-                                        highestSimilarity = similarity;
-                                        bestMatch = answer;
-                                    }
-                                }
-                    
-                                const similarityThreshold = 0.5;
-                                if (highestSimilarity >= similarityThreshold) {
-                                    hideLoading();
-                                    displayMessage(bestMatch, 'ai');
-                                } else {
-                                    currentQuestion = userInput;
-                                    awaitingUserResponse = true;
-                                    hideLoading();
-                                    displayMessage(`Eu não tenho uma resposta para isso agora. Você sabe a resposta para a pergunta: "${userInput}"?`, 'ai');
-            }
-        }, 3000);
-    }
-
-    function displayMessage(message, sender) {
-        const messageBubble = document.createElement('div');
-        messageBubble.className = sender === 'user' ? 'user-message' : 'ai-message';
-        messageBubble.innerHTML = message;
-        chatContainer.appendChild(messageBubble);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-
-    function saveNewResponse(question, answer) {
-        const normalizedQuestion = normalizeText(question);
-        savedResponses[normalizedQuestion] = answer;
-        localStorage.setItem('savedResponses', JSON.stringify(savedResponses));
-        console.log('Nova resposta salva:', question, answer);
-    }
-
-    function showLoading() {
-        const loadingMessage = document.createElement('div');
-        loadingMessage.className = 'loader ai-message';
-        loadingMessage.id = 'loading-indicator';
-        loadingMessage.innerHTML = '<span></span><span></span><span></span>';
-        chatContainer.appendChild(loadingMessage);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-
-    function hideLoading() {
-        const loadingMessage = document.getElementById('loading-indicator');
-        if (loadingMessage) loadingMessage.remove();
-    }
-
-    function falarClasse(element) {
-        const classe = element.nextElementSibling.textContent;
-        const msg = new SpeechSynthesisUtterance(classe);
-        window.speechSynthesis.speak(msg);
-    }
-
-    function falarTexto() {
-        const texto = document.getElementById('blocoAnotacao').innerText;
-        const msg = new SpeechSynthesisUtterance(texto);
-        window.speechSynthesis.speak(msg);
-    }
-
-    function escutarAutoFalante() {
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = 'pt-BR';
-        recognition.start();
-
-        recognition.onresult = async (event) => {
-            const userInput = event.results[0][0].transcript;
-            processInput(userInput);
-        };
-
-        recognition.onerror = (event) => {
-            displayMessage('Erro no reconhecimento de fala: ' + event.error, 'ai');
-        };
-    }
-
-    function copiarTexto() {
-        const texto = document.getElementById('blocoAnotacao').innerText;
-        navigator.clipboard.writeText(texto).then(() => {
-            alert('Texto copiado para a área de transferência!');
-        });
-    }
-
-    function limparTexto() {
-        document.getElementById('blocoAnotacao').innerText = '';
-    }
-    </script>
-    <!-- Adicionando Bootstrap JS -->
+            <div class="col-md-4">
+                <button class="btn btn-success btn-custom" onclick="falarTexto()">Falar</button>
+                <button class="btn btn-info btn-custom" onclick="escutarTexto()">Escutar</button>
+            </div>
+        </div>
+        <div id="chat-container"></div>
+    </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Função para copiar o texto
+function copiarTexto() {
+    const blocoAnotacao = document.getElementById('blocoAnotacao');
+    const texto = blocoAnotacao.innerText || blocoAnotacao.textContent;
+    navigator.clipboard.writeText(texto).then(() => {
+        alert('Texto copiado para a área de transferência');
+    }).catch(err => {
+        console.error('Erro ao copiar texto: ', err);
+    });
+}
+
+// Função para limpar o texto
+function limparTexto() {
+    const blocoAnotacao = document.getElementById('blocoAnotacao');
+    blocoAnotacao.innerText = '';
+}
+
+// Função para falar o texto
+function falarTexto() {
+    const blocoAnotacao = document.getElementById('blocoAnotacao');
+    const texto = blocoAnotacao.innerText || blocoAnotacao.textContent;
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(texto);
+    synth.speak(utterance);
+}
+
+// Função para escutar e transcrever o texto
+function escutarTexto() {
+    const blocoAnotacao = document.getElementById('blocoAnotacao');
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'pt-BR';
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const transcricao = event.results[0][0].transcript;
+        blocoAnotacao.innerText += ' ' + transcricao;
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Erro de reconhecimento de fala: ', event.error);
+    };
+}
+
+    </script>
 </body>
 </html>
