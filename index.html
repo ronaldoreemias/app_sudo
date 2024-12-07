@@ -1,150 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>app_sudo</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Competition Announcement</title>
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
-            background-color: #f4f4f9;
-            color: #333;
-            font-family: Arial, sans-serif;
-        }
-        .text-center button {
-            width: 40%;
-            margin: 10px;
-            font-size: 1.25rem;
-            line-height: 1.5;
-            padding: 10px;
-        }
-        .col-md-4 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .col-md-4 button {
-            width: 40%;
-            margin: 10px;
-            font-size: 1.25rem;
-            line-height: 1.5;
-            padding: 10px;
-        }
-        .cabecalho {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .bloco-anotacao {
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            min-height: 200px;
-            margin-bottom: 20px;
-            border-radius: 9px;
-            background-color: #ffffff;
-            color: #333;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            font-size: 1.25rem;
-            line-height: 1.5;
-        }
-        .bloco-anotacao:focus {
-            outline: none;
-            border-color: #80bdff;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
-        }
-        .btn-custom {
-            width: 100%;
-            margin-bottom: 10px;
-            font-size: 1.25rem;
-            line-height: 1.5;
-            padding: 10px;
-        }
-        footer {
-            display: flex;
-            justify-content: space-between;
-        }
-        @media (max-width: 768px) {
-            .cabecalho, .btn-custom, .bloco-anotacao {
-                width: 100%;
-            }
-            .btn-custom {
-                margin-bottom: 10px;
-            }
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #4CAF50;
+}
+
+.intro, .details, .submission {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+        
     </style>
 </head>
 <body>
-    <header class="cabecalho">
-        <a href="https://translate.google.com.br/?sl=auto&tl=pt&op=translate">
-            <button class="btn btn-primary btn-custom">Google Tradutor</button>
-        </a>
+    <header>
+        <img src="images/logo.png" alt="EIATS Logo" class="logo">
+        <h1>Competition Announcement</h1>
     </header>
-    <main class="container">
-        <div class="text-center">
-            <button class="btn btn-warning mb-2 btn-custom" onclick="copiarTexto()">Copiar texto</button>
-            <button class="btn btn-danger mb-2 btn-custom" onclick="limparTexto()">Limpar texto</button>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="bloco-anotacao" contenteditable="true" id="blocoAnotacao">
-                    Clique aqui e comece a digitar...
-                </div>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-success btn-custom" onclick="falarTexto()">Falar</button>
-                <button class="btn btn-info btn-custom" onclick="escutarTexto()">Escutar</button>
-            </div>
-        </div>
-        <div id="chat-container"></div>
+    <main>
+        <section class="intro">
+            <h2>Welcome to the EIATS Competition</h2>
+            <p>Develop the best version of this script and win a 100% free spot in our courses!</p>
+        </section>
+        <section class="details">
+            <h2>Competition Details</h2>
+            <p>Participants are required to create a website using HTML and CSS. The best design will be awarded a full scholarship to our prestigious courses.</p>
+        </section>
+        <section class="submission">
+            <h2>How to Submit</h2>
+            <p>Submit your entry by emailing your code to <a href="mailto:competition@eiats.edu">competition@eiats.edu</a> before the deadline.</p>
+        </section>
     </main>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Função para copiar o texto
-function copiarTexto() {
-    const blocoAnotacao = document.getElementById('blocoAnotacao');
-    const texto = blocoAnotacao.innerText || blocoAnotacao.textContent;
-    navigator.clipboard.writeText(texto).then(() => {
-        alert('Texto copiado para a área de transferência');
-    }).catch(err => {
-        console.error('Erro ao copiar texto: ', err);
-    });
-}
-
-// Função para limpar o texto
-function limparTexto() {
-    const blocoAnotacao = document.getElementById('blocoAnotacao');
-    blocoAnotacao.innerText = '';
-}
-
-// Função para falar o texto
-function falarTexto() {
-    const blocoAnotacao = document.getElementById('blocoAnotacao');
-    const texto = blocoAnotacao.innerText || blocoAnotacao.textContent;
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(texto);
-    synth.speak(utterance);
-}
-
-// Função para escutar e transcrever o texto
-function escutarTexto() {
-    const blocoAnotacao = document.getElementById('blocoAnotacao');
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'pt-BR';
-    recognition.start();
-
-    recognition.onresult = function(event) {
-        const transcricao = event.results[0][0].transcript;
-        blocoAnotacao.innerText += ' ' + transcricao;
-    };
-
-    recognition.onerror = function(event) {
-        console.error('Erro de reconhecimento de fala: ', event.error);
-    };
-}
-
-    </script>
+    <footer>
+        <p>© 2024 Exemplary Institute of Advanced Technological Studies. All rights reserved.</p>
+    </footer>
 </body>
 </html>
